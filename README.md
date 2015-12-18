@@ -7,4 +7,3 @@ CSharp application that converts, resizes and compresses images making them read
 --The program starts to process the image(s)<br>
 --If you give the application a folder, a folder named "ConvertedImages" is created inside it containing all processed images<br>
 --If you give it an image, a folder with the same name will be created in the same folder the original image is, containing the processed image.<br>
- 
