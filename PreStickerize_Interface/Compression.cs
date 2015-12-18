@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PreStickerize
+namespace PreStickerize_Interface
 {
     class Compression
     {
@@ -14,7 +14,7 @@ namespace PreStickerize
 
         public static System.Drawing.Image compress(Bitmap bitmapImage)
         {
-           System.Drawing.Image compressedImage = wuquantizer.QuantizeImage(bitmapImage);
+            System.Drawing.Image compressedImage = wuquantizer.QuantizeImage(bitmapImage);
             return compressedImage;
         }
     }

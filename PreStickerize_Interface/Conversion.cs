@@ -1,46 +1,39 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 
-namespace PreStickerize
+namespace PreStickerize_Interface
 {
     class Conversion
     {
 
-        public static void folderLevelConversion(string folder)
+        public static void folderLevelConversion(string[] files, string folder)
         {
- 
-            string[] files = Directory.GetFiles(folder);
-
 
             foreach (string file in files)
             {
                 try
                 {
-                    singleFileConversion(file);
-                    
+                    singleFileConversion(file, folder);
                 }
                 catch (OutOfMemoryException)
                 {
-                    Console.WriteLine("some shit happened with that ===> " + Path.GetFileNameWithoutExtension(file));
+                    MessageBox.Show("some shit happened with that ===> " + Path.GetFileNameWithoutExtension(file));
                 }
-                
 
             }
-            Console.WriteLine("done");
+            MessageBox.Show("Done :D");
         }
 
 
-        public static void singleFileConversion(string file)
+        public static void singleFileConversion(string file, string folder)
         {
-    
+
             Image fileImage = Image.FromFile(file);
-            Console.WriteLine("Converting " + Path.GetFileName(file));
-
-            imageResizer(fileImage, Path.GetDirectoryName(file) + "\\ConvertedImages", Path.GetFileNameWithoutExtension(file));
-
-            Console.WriteLine("Converted !");
-
+          
+            imageResizer(fileImage, folder, Path.GetFileNameWithoutExtension(file));
+            
         }
 
 
@@ -53,7 +46,7 @@ namespace PreStickerize
             {
                 imageWidth = imageWidth - (imageWidth - 512);
 
-                if ( imageHeight - (image.Width - 512) <= 0 )
+                if (imageHeight - (image.Width - 512) <= 0)
                 {
                     imageHeight = imageHeight - (imageHeight - 512);
                 }
@@ -62,11 +55,11 @@ namespace PreStickerize
                     imageHeight = imageHeight - (image.Width - 512);
                 }
             }
-            else if(imageHeight > imageWidth)
+            else if (imageHeight > imageWidth)
             {
                 imageHeight = imageHeight - (imageHeight - 512);
 
-                if (imageWidth - (image.Height - 512) <= 0 )
+                if (imageWidth - (image.Height - 512) <= 0)
                 {
                     imageWidth = imageWidth - (imageWidth - 512);
                 }
@@ -75,12 +68,12 @@ namespace PreStickerize
                     imageWidth = imageWidth - (image.Height - 512);
                 }
             }
-            else if(image.Width == image.Height)
+            else if (image.Width == image.Height)
             {
                 imageWidth = imageWidth - (imageWidth - 512);
                 imageHeight = imageHeight - (imageHeight - 512);
             }
-   
+
             try
             {
                 Bitmap imageBitmap = new Bitmap(image, new Size(imageWidth, imageHeight));
@@ -90,7 +83,7 @@ namespace PreStickerize
             catch (Exception)
             {
 
-                Console.WriteLine(imageWidth + " " + imageHeight);
+                MessageBox.Show("Error while handling image dimensions");
             }
         }
     }
