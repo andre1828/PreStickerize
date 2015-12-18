@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -62,10 +63,8 @@ namespace PreStickerize_Interface
         
         private void OKbutton_Click(object sender, EventArgs e)
         {
-            if(fileDialog.SafeFileNames.Length > 1)
-            {
-               Conversion.folderLevelConversion(fileDialog.FileNames, folder);
-            }
+            Thread backgroundProcess = new Thread(() => Conversion.imageLoader(fileDialog.FileNames, folder));
+            backgroundProcess.Start();
         }
     }
 }

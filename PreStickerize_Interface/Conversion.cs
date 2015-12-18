@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 
@@ -8,18 +9,24 @@ namespace PreStickerize_Interface
     class Conversion
     {
 
-        public static void folderLevelConversion(string[] files, string folder)
+        public static void imageLoader(string[] files, string folder)
         {
 
             foreach (string file in files)
             {
                 try
                 {
-                    singleFileConversion(file, folder);
+                    Image fileImage = Image.FromFile(file);
+
+                    imageProcessor(fileImage).Save(folder + "\\" + Path.GetFileNameWithoutExtension(file) + "_PreStickerized.png", ImageFormat.Png );
                 }
                 catch (OutOfMemoryException)
                 {
-                    MessageBox.Show("some shit happened with that ===> " + Path.GetFileNameWithoutExtension(file));
+                    MessageBox.Show("something wrong occurred in attempt to load " + Path.GetFileNameWithoutExtension(file));
+                }
+                catch (InvalidImageDimensionsException)
+                {
+                    MessageBox.Show("Error while handling image dimensions");
                 }
 
             }
@@ -27,17 +34,7 @@ namespace PreStickerize_Interface
         }
 
 
-        public static void singleFileConversion(string file, string folder)
-        {
-
-            Image fileImage = Image.FromFile(file);
-          
-            imageResizer(fileImage, folder, Path.GetFileNameWithoutExtension(file));
-            
-        }
-
-
-        public static void imageResizer(Image image, string folder, string name)
+        public static Image imageProcessor(Image image) 
         {
             int imageWidth = image.Width;
             int imageHeight = image.Height;
@@ -77,14 +74,16 @@ namespace PreStickerize_Interface
             try
             {
                 Bitmap imageBitmap = new Bitmap(image, new Size(imageWidth, imageHeight));
-                Image compressedImage = Compression.compress(imageBitmap);
-                compressedImage.Save(folder + "\\" + name + "_PNG.png");
+                return Compression.compress(imageBitmap);
+                //compressedImage.Save(folder + "\\" + name + "_PNG.png");
             }
-            catch (Exception)
+            catch (OutOfMemoryException)
             {
-
-                MessageBox.Show("Error while handling image dimensions");
+                return image = null;
+                throw new InvalidImageDimensionsException();
+               
             }
+
         }
     }
 }

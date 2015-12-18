@@ -57,6 +57,7 @@
     </Compile>
     <Compile Include="Compression.cs" />
     <Compile Include="Conversion.cs" />
+    <Compile Include="InvalidImageDimensionsException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ApplicationInterface.resx">
