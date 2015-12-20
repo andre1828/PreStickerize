@@ -15,21 +15,8 @@ namespace PreStickerize_Interface
 
             Parallel.ForEach(files, (file) =>
             {
-                try
-                {
-                    Image fileImage = Image.FromFile(file);
-
-                    imageProcessor(fileImage).Save(folder + "\\" + Path.GetFileNameWithoutExtension(file) + "_PreStickerized.png", ImageFormat.Png );
-                }
-                catch (OutOfMemoryException)
-                {
-                    MessageBox.Show("something wrong occurred in attempt to load " + Path.GetFileNameWithoutExtension(file));
-                }
-                catch (InvalidImageDimensionsException)
-                {
-                    MessageBox.Show("Error while handling image dimensions");
-                }
-
+                Image fileImage = Image.FromFile(file);
+                imageProcessor(fileImage).Save(folder + "\\" + Path.GetFileNameWithoutExtension(file) + "_PreStickerized.png", ImageFormat.Png);
             }
             
             );
