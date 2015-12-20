@@ -2,17 +2,18 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PreStickerize_Interface
 {
     class Conversion
     {
-
+    
         public static void imageLoader(string[] files, string folder)
         {
 
-            foreach (string file in files)
+            Parallel.ForEach(files, (file) =>
             {
                 try
                 {
@@ -30,6 +31,8 @@ namespace PreStickerize_Interface
                 }
 
             }
+            
+            );
             MessageBox.Show("Done :D");
         }
 

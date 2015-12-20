@@ -36,6 +36,17 @@
             Sourcebutton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
+            // Sourcebutton
+            // 
+            Sourcebutton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            Sourcebutton.Location = new System.Drawing.Point(5, 36);
+            Sourcebutton.Name = "Sourcebutton";
+            Sourcebutton.Size = new System.Drawing.Size(75, 20);
+            Sourcebutton.TabIndex = 2;
+            Sourcebutton.Text = "Source";
+            Sourcebutton.UseVisualStyleBackColor = true;
+            Sourcebutton.Click += new System.EventHandler(this.Sourcebutton_Click);
+            // 
             // SourceTextBox
             // 
             this.SourceTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -53,17 +64,6 @@
             this.DestinationTextBox.Size = new System.Drawing.Size(486, 20);
             this.DestinationTextBox.TabIndex = 1;
             this.DestinationTextBox.TextChanged += new System.EventHandler(this.DestinationTextBox_TextChanged);
-            // 
-            // Sourcebutton
-            // 
-            Sourcebutton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            Sourcebutton.Location = new System.Drawing.Point(5, 36);
-            Sourcebutton.Name = "Sourcebutton";
-            Sourcebutton.Size = new System.Drawing.Size(75, 20);
-            Sourcebutton.TabIndex = 2;
-            Sourcebutton.Text = "Source";
-            Sourcebutton.UseVisualStyleBackColor = true;
-            Sourcebutton.Click += new System.EventHandler(this.Sourcebutton_Click);
             // 
             // Destinationbutton
             // 

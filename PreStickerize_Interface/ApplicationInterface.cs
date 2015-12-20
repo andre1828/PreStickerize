@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -63,8 +64,10 @@ namespace PreStickerize_Interface
         
         private void OKbutton_Click(object sender, EventArgs e)
         {
+          
             Thread backgroundProcess = new Thread(() => Conversion.imageLoader(fileDialog.FileNames, folder));
             backgroundProcess.Start();
         }
+
     }
 }
