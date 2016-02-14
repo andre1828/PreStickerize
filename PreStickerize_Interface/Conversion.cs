@@ -9,22 +9,8 @@ namespace PreStickerize_Interface
 {
     class Conversion
     {
-    
-        public static void imageLoader(string[] files, string folder)
-        {
 
-            Parallel.ForEach(files, (file) =>
-            {
-                Image fileImage = Image.FromFile(file);
-                imageProcessor(fileImage).Save(folder + "\\" + Path.GetFileNameWithoutExtension(file) + "_PreStickerized.png", ImageFormat.Png);
-            }
-            
-            );
-            MessageBox.Show("Done :D");
-        }
-
-
-        public static Image imageProcessor(Image image) 
+        public Bitmap imageProcessor(Image image)
         {
             int imageWidth = image.Width;
             int imageHeight = image.Height;
@@ -63,15 +49,13 @@ namespace PreStickerize_Interface
 
             try
             {
-                Bitmap imageBitmap = new Bitmap(image, new Size(imageWidth, imageHeight));
-                return Compression.compress(imageBitmap);
-                //compressedImage.Save(folder + "\\" + name + "_PNG.png");
+                return new Bitmap(image, new Size(imageWidth, imageHeight));
             }
             catch (OutOfMemoryException)
             {
-                return image = null;
+                return null;
                 throw new InvalidImageDimensionsException();
-               
+
             }
 
         }
